@@ -22,4 +22,4 @@ boolean: true false
     }
 比较的是当前对象的引用和obj的引用是否相同，也就是说比较的默认就是地址
 这里euqals 和 == 效果一样
-（3）String 
+（3）String 是一个类， 是引用数据类型。
