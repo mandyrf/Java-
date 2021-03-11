@@ -11,4 +11,15 @@ double:64 位
 char: 16 位
 boolean: true false
 
-2. 
+注意：String 不是基本数据类型
+
+2. "==" 和 equals() 的区别？
+（1）"==" 作用1： 比较基本数据类型的值是否相等
+          作用2： 引用数据类型引用的地址是否相同， 比较两个对象的地址是否一样
+（2）Object 中equals的源码：
+ public boolean equals(Object obj) {
+        return (this == obj);
+    }
+比较的是当前对象的引用和obj的引用是否相同，也就是说比较的默认就是地址
+这里euqals 和 == 效果一样
+（3）String 
