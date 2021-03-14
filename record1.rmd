@@ -70,6 +70,7 @@ public static void main(String[] args) {
 （1）长度区别：集合长度可变，数组长度不可变
 （2）内容区别：集合可存储不同类型元素，数组存储只可单一类型元素
 （3）元素区别：集合只能存储引用类型元素，数组可存储引用类型，也可存储基本类型
+https://github.com/mandyrf/Java-/blob/main/java%20%E9%9B%86%E5%90%88%E7%B1%BB%E5%9B%BE.png
 
 
 
