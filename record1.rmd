@@ -23,3 +23,53 @@ boolean: true false
 比较的是当前对象的引用和obj的引用是否相同，也就是说比较的默认就是地址
 这里euqals 和 == 效果一样
 （3）String 是一个类， 是引用数据类型。
+public static void main(String[] args) {
+        String a = new String("ab"); // a 为⼀个引⽤
+        String b = new String("ab"); // b为另⼀个引⽤,对象的内容⼀样
+        String aa = "ab"; // 放在常量池中
+        String bb = "ab"; // 从常量池中查找
+        if (aa == bb) { // true
+            System.out.println("aa==bb");
+        }
+        if (a == b) { // false，⾮同⼀对象
+            System.out.println("a==b");
+        }
+        if (a.equals(b)) { // true
+            System.out.println("aEQb");
+        }
+        if (42 == 42.0) { // true
+            System.out.println("true");
+        }
+}
+
+  private final char value[];
+  public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;  // 先比较引用地址， 是不是同一个对象
+        }
+        if (anObject instanceof String) {  // 判断是否是一个String 类
+            String anotherString = (String)anObject;
+            int n = value.length;
+            if (n == anotherString.value.length) {  // 先比较字符串的长度
+                char v1[] = value;
+                char v2[] = anotherString.value;
+                int i = 0;
+                while (n-- != 0) {
+                    if (v1[i] != v2[i])  // 再比较字符是否相等
+                        return false;
+                    i++;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    
+3. java 中的集合类？
+集合与数组的区别
+（1）长度区别：集合长度可变，数组长度不可变
+（2）内容区别：集合可存储不同类型元素，数组存储只可单一类型元素
+（3）元素区别：集合只能存储引用类型元素，数组可存储引用类型，也可存储基本类型
+
+
+
