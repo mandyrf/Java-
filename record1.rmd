@@ -83,6 +83,9 @@ https://blog.csdn.net/oman001/article/details/104843676
 操作系统中可以同时运行多个进程，同一个进程中有多个线程同时执行，但每个时间片中只有一个线程执行。
 
 5. 线程的三种创建方式？
+
+创建线程有三种方式：继承Thread类；无返回值的Runnable；有返回值的Callable
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
