@@ -90,65 +90,50 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-public class Test {
+public class CreateThread {
 
-	public static void main(String[] args) {
-		MyThread thread = new MyThread(); // 创建实例
-		thread.start(); // 启动线程
-
-		MyThread2 rtt = new MyThread2(); // 创建 Runnable实现类的实例，并以此实例作为Thread的target来创建Thread对象，
-		// 该Thread对象才是真正的线程对象。
-		new Thread(rtt, "新线程1").start();
-
-		/*
-		 * 创建Callable实现类的实例，使用FutureTask类来包装Callable对象，
-		 * 该FutureTask对象封装了该Callable对象的call()方法的返回值。
-		 * （FutureTask是一个包装器，它通过接受Callable来创建，它同时实现了Future和Runnable接口。
-		 */
-
-		CallableThreadTest ctt = new CallableThreadTest();
-		FutureTask<Integer> ft = new FutureTask<>(ctt);
-		System.out.println(Thread.currentThread().getName());
-
-		new Thread(ft, "有返回值的线程").start();
-		try {
-			System.out.println("子线程的返回值：" + ft.get());
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-	}
-
-	static class MyThread extends Thread { // 定义子类
-
+	public static class TestThread extends Thread {
 		@Override
-		public void run() { // 重写run()方法
-			super.run();
-			System.out.println("This is my thread: " + this.getName());
+		public void run() {
+			System.out.println("--继承thread--");
 		}
-
 	}
 
-	static class MyThread2 implements Runnable { // 定义接口的实现类， 重写run()方法
+	public static class TestRunnable implements Runnable {
 
 		@Override
 		public void run() {
-			System.out.println("This is my thread: Runnable()" + Thread.currentThread().getName());
+			System.out.println("--runnable没有返回值--");
 		}
 
 	}
 
-	static class CallableThreadTest implements Callable<Integer> {
+	public static class TestCallable implements Callable<String> {
 
 		@Override
-		public Integer call() throws Exception {
-			System.out.println(Thread.currentThread().getName());
-			return null;
+		public String call() throws Exception {
+			System.out.println("--callable有返回值--");
+			return "call return: test-callable";
 		}
+
+	}
+
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		Thread thread = new Thread(new TestThread());
+		thread.start();
+
+		thread = new Thread(new TestRunnable());
+		thread.start();
+
+		FutureTask<String> ft = new FutureTask<>(new TestCallable());
+		thread = new Thread(ft);
+		thread.start();
+
+		System.out.println(ft.get());
 
 	}
 }
+
 
 三种方式的比较：
 1、采用实现Runnable、Callable接口的方式创建多线程时，
